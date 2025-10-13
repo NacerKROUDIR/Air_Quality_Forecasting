@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_14564040319de54a8aa556af45bd1a06 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_14564040319de54a8aa556af45bd1a06" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_14564040319de54a8aa556af45bd1a06 = L.map(
+                "map_14564040319de54a8aa556af45bd1a06",
+                {
+                    center: [46.603354, 1.888334],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_964854a3f77753e5138b7f0d83472fcf = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_964854a3f77753e5138b7f0d83472fcf.addTo(map_14564040319de54a8aa556af45bd1a06);
+        
+    
+            var marker_466f6c02aaffae9d6e8244107f472f70 = L.marker(
+                [45.447, 4.385],
+                {
+}
+            ).addTo(map_14564040319de54a8aa556af45bd1a06);
+        
+    
+        var popup_99b01cadf771a77943c6aa33ffa884b3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_077307dfe9f3792ef898a8b78d21cfe8 = $(`<div id="html_077307dfe9f3792ef898a8b78d21cfe8" style="width: 100.0%; height: 100.0%;">Auvergne-Rhône-Alpes</div>`)[0];
+                popup_99b01cadf771a77943c6aa33ffa884b3.setContent(html_077307dfe9f3792ef898a8b78d21cfe8);
+            
+        
+
+        marker_466f6c02aaffae9d6e8244107f472f70.bindPopup(popup_99b01cadf771a77943c6aa33ffa884b3)
+        ;
+
+        
+    
+    
+            marker_466f6c02aaffae9d6e8244107f472f70.bindTooltip(
+                `<div>
+                     Auvergne-Rhône-Alpes
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_fcc74fba5fed7e715038a8317c8524de = L.marker(
+                [47.28, 4.811],
+                {
+}
+            ).addTo(map_14564040319de54a8aa556af45bd1a06);
+        
+    
+        var popup_f4b794021dc533d3378a8e917d15f749 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_edaeb8ea94a6521d36b8f0d5d77f4fd8 = $(`<div id="html_edaeb8ea94a6521d36b8f0d5d77f4fd8" style="width: 100.0%; height: 100.0%;">Bourgogne-Franche-Comté</div>`)[0];
+                popup_f4b794021dc533d3378a8e917d15f749.setContent(html_edaeb8ea94a6521d36b8f0d5d77f4fd8);
+            
+        
+
+        marker_fcc74fba5fed7e715038a8317c8524de.bindPopup(popup_f4b794021dc533d3378a8e917d15f749)
+        ;
+
+        
+    
+    
+            marker_fcc74fba5fed7e715038a8317c8524de.bindTooltip(
+                `<div>
+                     Bourgogne-Franche-Comté
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_f00d53b5d1ca99d1e8b3823e1f2cf5f5 = L.marker(
+                [48.202, -2.932],
+                {
+}
+            ).addTo(map_14564040319de54a8aa556af45bd1a06);
+        
+    
+        var popup_6a79c9285791783d404d3d15b3dbbd61 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_90110180a32f2e183db5ea2790c8449e = $(`<div id="html_90110180a32f2e183db5ea2790c8449e" style="width: 100.0%; height: 100.0%;">Bretagne</div>`)[0];
+                popup_6a79c9285791783d404d3d15b3dbbd61.setContent(html_90110180a32f2e183db5ea2790c8449e);
+            
+        
+
+        marker_f00d53b5d1ca99d1e8b3823e1f2cf5f5.bindPopup(popup_6a79c9285791783d404d3d15b3dbbd61)
+        ;
+
+        
+    
+    
+            marker_f00d53b5d1ca99d1e8b3823e1f2cf5f5.bindTooltip(
+                `<div>
+                     Bretagne
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_2ca8e5070002885b5a4fe6f14ebc332d = L.marker(
+                [47.751, 1.675],
+                {
+}
+            ).addTo(map_14564040319de54a8aa556af45bd1a06);
+        
+    
+        var popup_e99781c37327e348dfbc8728f2e7b648 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d45ddafc1fa84fb286d78bff9294ebab = $(`<div id="html_d45ddafc1fa84fb286d78bff9294ebab" style="width: 100.0%; height: 100.0%;">Centre-Val de Loire</div>`)[0];
+                popup_e99781c37327e348dfbc8728f2e7b648.setContent(html_d45ddafc1fa84fb286d78bff9294ebab);
+            
+        
+
+        marker_2ca8e5070002885b5a4fe6f14ebc332d.bindPopup(popup_e99781c37327e348dfbc8728f2e7b648)
+        ;
+
+        
+    
+    
+            marker_2ca8e5070002885b5a4fe6f14ebc332d.bindTooltip(
+                `<div>
+                     Centre-Val de Loire
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_c5ad5b633d3e07726d18e605f3b1a5bb = L.marker(
+                [42.039, 9.012],
+                {
+}
+            ).addTo(map_14564040319de54a8aa556af45bd1a06);
+        
+    
+        var popup_cef11d37cdf085f5c904a2619e4ee01f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8bd2643f4e34b6ba40fe9ea56cf56b8e = $(`<div id="html_8bd2643f4e34b6ba40fe9ea56cf56b8e" style="width: 100.0%; height: 100.0%;">Corse</div>`)[0];
+                popup_cef11d37cdf085f5c904a2619e4ee01f.setContent(html_8bd2643f4e34b6ba40fe9ea56cf56b8e);
+            
+        
+
+        marker_c5ad5b633d3e07726d18e605f3b1a5bb.bindPopup(popup_cef11d37cdf085f5c904a2619e4ee01f)
+        ;
+
+        
+    
+    
+            marker_c5ad5b633d3e07726d18e605f3b1a5bb.bindTooltip(
+                `<div>
+                     Corse
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_0e7057c3bf5fe7d949dbcded6bbcb98d = L.marker(
+                [48.699, 6.187],
+                {
+}
+            ).addTo(map_14564040319de54a8aa556af45bd1a06);
+        
+    
+        var popup_2264cf939b8e4cc8f7b08f6f5bcce68f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f7309b543a6416c0db4a71a591718ebc = $(`<div id="html_f7309b543a6416c0db4a71a591718ebc" style="width: 100.0%; height: 100.0%;">Grand Est</div>`)[0];
+                popup_2264cf939b8e4cc8f7b08f6f5bcce68f.setContent(html_f7309b543a6416c0db4a71a591718ebc);
+            
+        
+
+        marker_0e7057c3bf5fe7d949dbcded6bbcb98d.bindPopup(popup_2264cf939b8e4cc8f7b08f6f5bcce68f)
+        ;
+
+        
+    
+    
+            marker_0e7057c3bf5fe7d949dbcded6bbcb98d.bindTooltip(
+                `<div>
+                     Grand Est
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_390a06d76ddabc6c4adbbb6e0f816cd8 = L.marker(
+                [50.48, 2.793],
+                {
+}
+            ).addTo(map_14564040319de54a8aa556af45bd1a06);
+        
+    
+        var popup_cd90a6f74aae2c1eaf06f7b5466bbb2b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4d0c47b483d23f3de8c3f3843f692a1f = $(`<div id="html_4d0c47b483d23f3de8c3f3843f692a1f" style="width: 100.0%; height: 100.0%;">Hauts-de-France</div>`)[0];
+                popup_cd90a6f74aae2c1eaf06f7b5466bbb2b.setContent(html_4d0c47b483d23f3de8c3f3843f692a1f);
+            
+        
+
+        marker_390a06d76ddabc6c4adbbb6e0f816cd8.bindPopup(popup_cd90a6f74aae2c1eaf06f7b5466bbb2b)
+        ;
+
+        
+    
+    
+            marker_390a06d76ddabc6c4adbbb6e0f816cd8.bindTooltip(
+                `<div>
+                     Hauts-de-France
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_c29f049129bb4be451dce1d161e9a6a7 = L.marker(
+                [48.849, 2.637],
+                {
+}
+            ).addTo(map_14564040319de54a8aa556af45bd1a06);
+        
+    
+        var popup_b8d639ea087bc3ce79cae74a77c9ea8c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_09c7a1594e72022b93cedebdce2a8bcc = $(`<div id="html_09c7a1594e72022b93cedebdce2a8bcc" style="width: 100.0%; height: 100.0%;">Île-de-France</div>`)[0];
+                popup_b8d639ea087bc3ce79cae74a77c9ea8c.setContent(html_09c7a1594e72022b93cedebdce2a8bcc);
+            
+        
+
+        marker_c29f049129bb4be451dce1d161e9a6a7.bindPopup(popup_b8d639ea087bc3ce79cae74a77c9ea8c)
+        ;
+
+        
+    
+    
+            marker_c29f049129bb4be451dce1d161e9a6a7.bindTooltip(
+                `<div>
+                     Île-de-France
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_7b7990d7d9fe013c8ae7d1f7f0c81282 = L.marker(
+                [49.181, 0.372],
+                {
+}
+            ).addTo(map_14564040319de54a8aa556af45bd1a06);
+        
+    
+        var popup_823dad707abd04d0b4bd9233106a9e4a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cc5fd9e0a82bef8ef89b7347db30277d = $(`<div id="html_cc5fd9e0a82bef8ef89b7347db30277d" style="width: 100.0%; height: 100.0%;">Normandie</div>`)[0];
+                popup_823dad707abd04d0b4bd9233106a9e4a.setContent(html_cc5fd9e0a82bef8ef89b7347db30277d);
+            
+        
+
+        marker_7b7990d7d9fe013c8ae7d1f7f0c81282.bindPopup(popup_823dad707abd04d0b4bd9233106a9e4a)
+        ;
+
+        
+    
+    
+            marker_7b7990d7d9fe013c8ae7d1f7f0c81282.bindTooltip(
+                `<div>
+                     Normandie
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_3ef6151b6712bac5e8a00865232d37a5 = L.marker(
+                [45.708, 0.298],
+                {
+}
+            ).addTo(map_14564040319de54a8aa556af45bd1a06);
+        
+    
+        var popup_be77a7f0329e08ef6c503554325224ad = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_68572178d152464fd99b42854e20d323 = $(`<div id="html_68572178d152464fd99b42854e20d323" style="width: 100.0%; height: 100.0%;">Nouvelle-Aquitaine</div>`)[0];
+                popup_be77a7f0329e08ef6c503554325224ad.setContent(html_68572178d152464fd99b42854e20d323);
+            
+        
+
+        marker_3ef6151b6712bac5e8a00865232d37a5.bindPopup(popup_be77a7f0329e08ef6c503554325224ad)
+        ;
+
+        
+    
+    
+            marker_3ef6151b6712bac5e8a00865232d37a5.bindTooltip(
+                `<div>
+                     Nouvelle-Aquitaine
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_ca243f9959616d05fe5ff0e4815e5357 = L.marker(
+                [43.892, 3.283],
+                {
+}
+            ).addTo(map_14564040319de54a8aa556af45bd1a06);
+        
+    
+        var popup_d918263810cb30451fcb016b92955e84 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f627de978cdd12b1cd8d5f429c77c6b1 = $(`<div id="html_f627de978cdd12b1cd8d5f429c77c6b1" style="width: 100.0%; height: 100.0%;">Occitanie</div>`)[0];
+                popup_d918263810cb30451fcb016b92955e84.setContent(html_f627de978cdd12b1cd8d5f429c77c6b1);
+            
+        
+
+        marker_ca243f9959616d05fe5ff0e4815e5357.bindPopup(popup_d918263810cb30451fcb016b92955e84)
+        ;
+
+        
+    
+    
+            marker_ca243f9959616d05fe5ff0e4815e5357.bindTooltip(
+                `<div>
+                     Occitanie
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_5704dcb583128db12a7b652255e3d087 = L.marker(
+                [47.763, -0.329],
+                {
+}
+            ).addTo(map_14564040319de54a8aa556af45bd1a06);
+        
+    
+        var popup_6038c5017b59231e33a19d8f44c88c5e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_184efcad611b6b5c4771212804de1b0f = $(`<div id="html_184efcad611b6b5c4771212804de1b0f" style="width: 100.0%; height: 100.0%;">Pays de la Loire</div>`)[0];
+                popup_6038c5017b59231e33a19d8f44c88c5e.setContent(html_184efcad611b6b5c4771212804de1b0f);
+            
+        
+
+        marker_5704dcb583128db12a7b652255e3d087.bindPopup(popup_6038c5017b59231e33a19d8f44c88c5e)
+        ;
+
+        
+    
+    
+            marker_5704dcb583128db12a7b652255e3d087.bindTooltip(
+                `<div>
+                     Pays de la Loire
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_a412984b24e2b9c839f314761ceb7607 = L.marker(
+                [43.935, 6.067],
+                {
+}
+            ).addTo(map_14564040319de54a8aa556af45bd1a06);
+        
+    
+        var popup_bd681bafe0c335bccfdca95a59177d36 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_584a8f07ff51c8a0ab273fab44bf6cd7 = $(`<div id="html_584a8f07ff51c8a0ab273fab44bf6cd7" style="width: 100.0%; height: 100.0%;">Provence-Alpes-Côte d’Azur</div>`)[0];
+                popup_bd681bafe0c335bccfdca95a59177d36.setContent(html_584a8f07ff51c8a0ab273fab44bf6cd7);
+            
+        
+
+        marker_a412984b24e2b9c839f314761ceb7607.bindPopup(popup_bd681bafe0c335bccfdca95a59177d36)
+        ;
+
+        
+    
+    
+            marker_a412984b24e2b9c839f314761ceb7607.bindTooltip(
+                `<div>
+                     Provence-Alpes-Côte d’Azur
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
