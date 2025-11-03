@@ -1,14 +1,14 @@
-Region,Latitude,Longitude
-Auvergne-Rhône-Alpes,45.447,4.385
-Bourgogne-Franche-Comté,47.28,4.811
-Bretagne,48.202,-2.932
-Centre-Val de Loire,47.751,1.675
-Corse,42.039,9.012
-Grand Est,48.699,6.187
-Hauts-de-France,50.48,2.793
-Île-de-France,48.849,2.637
-Normandie,49.181,0.372
-Nouvelle-Aquitaine,45.599,0.614
-Occitanie,43.463,2.145
-Pays de la Loire,47.763,-0.329
-Provence-Alpes-Côte d’Azur,43.935,6.067
+region_id,Region,Latitude,Longitude
+0,auvergne_rhone_alpes,45.447,4.385
+1,bourgogne_franche_comte,47.28,4.811
+2,bretagne,48.202,-2.932
+3,centre_val_de_loire,47.751,1.675
+4,corse,42.039,9.012
+5,grand_est,48.699,6.187
+6,hauts_de_france,50.48,2.793
+7,ile_de_france,48.849,2.637
+8,normandie,49.181,0.372
+9,nouvelle_aquitaine,45.599,0.614
+10,occitanie,43.463,2.145
+11,pays_de_la_loire,47.763,-0.329
+12,provence_alpes_cote_dazur,43.935,6.067
