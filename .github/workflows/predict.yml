@@ -27,6 +27,8 @@ jobs:
                     pandas==2.1.4 \
                     numpy \
                     joblib==1.5.2 \
+                    "hopsworks[python]" \
+                    pyarrow \
                     requests
     
     - name: Run prediction script
