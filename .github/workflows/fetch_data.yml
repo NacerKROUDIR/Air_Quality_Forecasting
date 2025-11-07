@@ -28,6 +28,7 @@ jobs:
                     retry-requests==2.0.0 \
                     hopsworks==4.2.4 \
                     pandas==2.1.4 \
+                    great_expectations \
                     "hopsworks[python]" \
                     pyarrow \
                     numpy
