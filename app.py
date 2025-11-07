@@ -32,7 +32,7 @@ if 'aqi_df' not in st.session_state:
 if 'predictions_df' not in st.session_state:
     st.session_state.predictions_df = None
 
-@st.cache_data(ttl=3600)  # Cache for 1 hour
+@st.cache_data(ttl=900)  # Cache for 15 minutes
 def load_data_from_hopsworks():
     """Load data from Hopsworks feature stores"""
     try:
