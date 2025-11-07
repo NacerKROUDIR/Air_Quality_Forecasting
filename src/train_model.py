@@ -13,7 +13,7 @@ training_config = {
     'input_lags': [1, 2, 3, 4, 5, 6, 23, 24, 25],
     'forecast_horizon': 12,
     'random_state': 42,
-    'months_before_last': 4  # parameter to set the number of months to cut from training data
+    'months_before_last': 6  # parameter to set the number of months to cut from training data
 }
 
 # Set up logging
