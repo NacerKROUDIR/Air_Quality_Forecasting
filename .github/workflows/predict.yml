@@ -1,0 +1,46 @@
+name: Generate Predictions
+
+on:
+  schedule:
+    # Runs at 15 minutes past every hour (00:15, 01:15, 02:15, etc.)
+    - cron: '15 * * * *'
+  workflow_dispatch:  # Allows manual triggering from GitHub UI
+
+jobs:
+  predict:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python 3.12.4
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12.4'
+        cache: 'pip'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install hopsworks==4.2.4 \
+                    pandas==2.1.4 \
+                    numpy \
+                    joblib==1.5.2 \
+                    requests
+    
+    - name: Run prediction script
+      env:
+        HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
+      run: |
+        python src/predict.py
+    
+    - name: Upload logs (on failure)
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: prediction-logs-${{ github.run_number }}
+        path: |
+          *.log
+          *.csv
+        retention-days: 7

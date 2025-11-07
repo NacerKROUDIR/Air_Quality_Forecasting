@@ -1,0 +1,47 @@
+name: Fetch Air Quality Data
+
+on:
+  schedule:
+    # Runs at 5 minutes past every hour (00:05, 01:05, 02:05, etc.)
+    - cron: '5 * * * *'
+  workflow_dispatch:  # Allows manual triggering from GitHub UI
+
+jobs:
+  fetch-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python 3.12.4
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12.4'
+        cache: 'pip'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install openmeteo-requests==1.7.3 \
+                    requests-cache==1.2.1 \
+                    retry-requests==2.0.0 \
+                    hopsworks==4.2.4 \
+                    pandas==2.1.4 \
+                    numpy
+    
+    - name: Run fetch_data.py
+      env:
+        HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
+      run: |
+        python src/fetch_data.py
+    
+    - name: Upload logs (if failure)
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: error-logs
+        path: |
+          *.log
+          .cache/
+        retention-days: 7
