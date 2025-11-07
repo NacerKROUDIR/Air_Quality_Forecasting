@@ -36,7 +36,7 @@ jobs:
       env:
         HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
       run: |
-        python src/fetch_data.py
+        python src/fetch_data_action.py
     
     - name: Upload logs (if failure)
       if: failure()
