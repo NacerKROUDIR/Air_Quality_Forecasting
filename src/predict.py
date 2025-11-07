@@ -134,7 +134,7 @@ feature_view = fs.get_or_create_feature_view(
 )
 
 pred_fg = fs.get_or_create_feature_group(
-    name=f"predictions_test2",
+    name=f"predictions",
     version=1,
     online_enabled=True,
     description=f"Predictions of the Air Quality Index in 13 regions in France",
@@ -158,7 +158,7 @@ except RestAPIError:
     # Find the last date in the dataset
     last_dates = None
     last_hour = df_all['date'].max()
-    start_hour = last_hour - pd.Timedelta(weeks=8)
+    start_hour = last_hour - pd.Timedelta(weeks=40)
 
 X, extra = prepare_data(feature_view, start_hour)
 
