@@ -1,9 +1,6 @@
 name: Generate Predictions
 
 on:
-  schedule:
-    # Runs at 15 minutes past every hour (00:15, 01:15, 02:15, etc.)
-    - cron: '15 * * * *'
   workflow_dispatch:  # Allows manual triggering from GitHub UI
 
 jobs:
