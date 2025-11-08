@@ -1,0 +1,54 @@
+name: Fetch and Predict AQI
+
+on:
+  schedule:
+    # Run at 2 minutes past every hour
+    - cron: '2 * * * *'
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  fetch-and-predict:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12.4'
+        cache: 'pip'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install openmeteo-requests==1.7.3 \
+                    requests-cache==1.2.1 \
+                    retry-requests==2.0.0 \
+                    hopsworks==4.2.4 \
+                    pandas==2.1.4 \
+                    great_expectations==0.18.12 \
+                    "hopsworks[python]" \
+                    pyarrow \
+                    numpy \
+                    joblib==1.5.2 \
+                    requests
+    
+    - name: Run fetch and predict script
+      env:
+        HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
+      run: |
+        # Create logs directory if it doesn't exist
+        mkdir -p logs
+        
+        # Run script and capture output
+        python src/fetch_and_predict.py 2>&1 | tee logs/fetch_predict_$(date +%Y%m%d_%H%M%S).log
+    
+    - name: Upload logs as artifact
+      uses: actions/upload-artifact@v4
+      if: always() # Upload logs even if the script fails
+      with:
+        name: logs-${{ github.run_number }}-${{ github.run_attempt }}
+        path: logs/
+        retention-days: 30 # Keep logs for 30 days
