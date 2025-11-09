@@ -1,6 +1,9 @@
 name: Fetch and Predict AQI
 
 on:
+  schedule:
+    # Run at 2 minutes past every hour
+    - cron: '2 * * * *'
   workflow_dispatch: # Allows manual triggering
 
 jobs:
