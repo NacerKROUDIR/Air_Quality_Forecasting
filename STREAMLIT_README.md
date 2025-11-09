@@ -87,5 +87,5 @@ The app connects to the following Hopsworks feature stores:
 
 ## Notes
 
-- Data is cached for 1 hour to improve performance
+- Data is cached for 15 minutes to improve performance
 - Make sure your Hopsworks project has the required feature groups before running the app
