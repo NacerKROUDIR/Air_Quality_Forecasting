@@ -93,7 +93,7 @@ The European AQI ranges from:
 
 1. **Clone the repository**:
 ```bash
-git clone <repository-url>
+git clone https://github.com/NacerKROUDIR/Air_Quality_Forecasting
 cd MLOps_project
 ```
 
