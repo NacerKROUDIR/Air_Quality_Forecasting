@@ -201,7 +201,7 @@ def predict_aqi(project, pred_fg, df, last_dates, start_hour):
         predictions_df = predictions_df.merge(last_dates, on="region_id", how="left")
         predictions_df = predictions_df[predictions_df["date"] > predictions_df["last_date"]].drop(columns=["last_date"])
 
-    predictions_df['date'] = predictions_df['date'].dt.tz_localize(None).astype(str)
+    predictions_df['date'] = predictions_df['date'].dt.strftime('%Y-%m-%d %H:%M:%S')
     predictions_df['region_id'] = np.int8(predictions_df['region_id'])
 
 
@@ -223,7 +223,7 @@ def main():
     regions_df = regions_fg.read()
 
     pred_fg = fs.get_feature_group(
-        name=f"predictions",
+        name="predictions",
         version=1,
     )
 
