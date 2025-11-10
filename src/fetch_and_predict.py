@@ -31,6 +31,9 @@ def prepare_data(df, start_date, training_config):
     
     # Convert date to datetime if it's string
     df['date'] = pd.to_datetime(df['date'])
+
+    # Drop duplicates in case there are any
+    df.drop_duplicates(inplace=True)
     
     if len(df) == 0:
         logger.error(f"⚠️  No data")
@@ -212,6 +215,50 @@ def predict_aqi(project, pred_fg, df, last_dates, start_hour):
     logger.info("✅ Predictions uploaded successfully")
     logger.info(f"📅 Date range: {predictions_df['date'].min()} to {predictions_df['date'].max()}")
 
+def fetch_data_with_retry(aqi_fg, aqi_df, regions_df, last_dates, start_hour, end_hour, max_attempts=5):
+    """Execute fetch_data with independent retry logic."""
+    for attempt in range(1, max_attempts + 1):
+        try:
+            logger.info(f"🔄 Fetch data attempt {attempt}/{max_attempts}")
+            df = fetch_data(aqi_fg, aqi_df, regions_df, last_dates, start_hour, end_hour)
+            
+            # Validate that df was successfully created and has data points
+            if df is not None and len(df) > 0:
+                logger.info(f"✅ Fetch data completed successfully. Retrieved {len(df)} data points")
+                return df
+            else:
+                raise ValueError("fetch_data returned empty or None dataframe")
+                
+        except Exception as e:
+            logger.error(f"❌ Fetch data attempt {attempt} failed with error: {e}")
+            if attempt < max_attempts:
+                wait_time = 2 ** attempt  # Exponential backoff
+                logger.info(f"⏳ Retrying fetch_data in {wait_time} seconds...")
+                time.sleep(wait_time)
+            else:
+                logger.error(f"❌ All {max_attempts} fetch_data attempts failed")
+                raise
+
+
+def predict_aqi_with_retry(project, pred_fg, df, last_dates, start_hour_pred, max_attempts=5):
+    """Execute predict_aqi with independent retry logic."""
+    for attempt in range(1, max_attempts + 1):
+        try:
+            logger.info(f"🔄 Predict AQI attempt {attempt}/{max_attempts}")
+            predict_aqi(project, pred_fg, df, last_dates, start_hour_pred)
+            logger.info(f"✅ Predict AQI completed successfully")
+            return True
+        except Exception as e:
+            logger.error(f"❌ Predict AQI attempt {attempt} failed with error: {e}")
+            if attempt < max_attempts:
+                wait_time = 2 ** attempt  # Exponential backoff
+                logger.info(f"⏳ Retrying predict_aqi in {wait_time} seconds...")
+                time.sleep(wait_time)
+            else:
+                logger.error(f"❌ All {max_attempts} predict_aqi attempts failed")
+                raise
+
+
 def main():
     project = hopsworks.login()
     fs = project.get_feature_store()
@@ -230,14 +277,15 @@ def main():
     try:
         pred_df = pred_fg.read()
 
-        last_dates = pred_df.loc[
+        last_dates_pred = pred_df.loc[
             pred_df.groupby("region_id")["date"].idxmax()
         ].reset_index(drop=True)[['region_id', 'date']]
-        last_dates.rename(columns={"date": "last_date"}, inplace=True)
+        last_dates_pred.rename(columns={"date": "last_date"}, inplace=True)
 
-        start_hour_pred = last_dates['last_date'].min()
+        start_hour_pred = last_dates_pred['last_date'].min()
     except RestAPIError:
-        last_dates = None
+        last_dates_pred = None
+        start_hour_pred = None
 
     aqi_fg = fs.get_feature_group(
         name='aqi_data_france', 
@@ -251,35 +299,35 @@ def main():
     ].reset_index(drop=True)[['region_id', 'date']]
     last_dates.rename(columns={"date": "last_date"}, inplace=True)
 
-    start_hour = pd.to_datetime(last_dates['last_date'].min()).strftime("%Y-%m-%dT%H:%M") 
+    start_hour_str = pd.to_datetime(last_dates['last_date'].min()).strftime("%Y-%m-%dT%H:%M") 
+    start_hour_dt = pd.to_datetime(last_dates['last_date'].min())
     end_hour = (datetime.now() + timedelta(hours=1)).replace(minute=0, second=0, microsecond=0).strftime("%Y-%m-%dT%H:%M") 
 
-    if end_hour > start_hour:
-        df = fetch_data(aqi_fg, aqi_df, regions_df, last_dates, start_hour, end_hour)
-        predict_aqi(project, pred_fg, df, last_dates, start_hour_pred)
-
+    if end_hour > start_hour_str:
+        # Fetch data with independent retry logic
+        df = fetch_data_with_retry(aqi_fg, aqi_df, regions_df, last_dates, start_hour_str, end_hour)
+        
+        # Only execute predict_aqi if fetch_data was successful and df has data points
+        if df is not None and len(df) > 0:
+            logger.info(f"✅ Fetch data successful with {len(df)} data points. Proceeding to prediction...")
+            
+            # Use start_hour_pred if available, otherwise use start_hour_dt as fallback
+            if start_hour_pred is None:
+                start_hour_pred = start_hour_dt
+                logger.info("⚠️  No existing predictions found. Using AQI data start hour for predictions.")
+            
+            # Predict with independent retry logic
+            predict_aqi_with_retry(project, pred_fg, df, last_dates_pred, start_hour_pred)
+        else:
+            logger.warning("⚠️  Fetch data did not return valid data. Skipping prediction.")
     else:
         logger.info("  Data is up to date")
 
 
-def run_with_retry(max_attempts=5):
-    """Execute main function with retry logic."""
-    for attempt in range(1, max_attempts + 1):
-        try:
-            logger.info(f"Attempt {attempt}/{max_attempts}")
-            main()
-            logger.info("Execution completed successfully")
-            return True
-        except Exception as e:
-            logger.error(f"Attempt {attempt} failed with error: {e}")
-            if attempt < max_attempts:
-                wait_time = 2 ** attempt  # Exponential backoff
-                logger.info(f"Retrying in {wait_time} seconds...")
-                time.sleep(wait_time)
-            else:
-                logger.error(f"All {max_attempts} attempts failed")
-                raise
-
-
 if __name__ == "__main__":
-    run_with_retry(max_attempts=5)
+    try:
+        main()
+        logger.info("✅ Execution completed successfully")
+    except Exception as e:
+        logger.error(f"❌ Execution failed: {e}")
+        raise
